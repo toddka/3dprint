@@ -5,20 +5,22 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="static/js/upload.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
 
-<div class="modal">
+<div class="modal fade" id="submit-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" id = "success-note" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
+        <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Upload Successful! We will notify you when your print is complete.</strong> 
+</div>
       </div>
       <div class="modal-body">
-        <p>One fine body…</p>
+        <p>We may follow up with you for more details regarding your print if necessary.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <a href="/view" class="btn btn-primary">Close</a>
       </div>
     </div>
   </div>

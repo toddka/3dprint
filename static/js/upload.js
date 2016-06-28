@@ -30,7 +30,7 @@ $(document).ready(function() {
 				processData : false,
 				contentType : false,
 				success : function() {
-					$('#success-note').attr('aria-hidden', false);
+					$('#submit-modal').modal('toggle');
 				}
 			});
 	});

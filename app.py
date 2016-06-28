@@ -38,6 +38,11 @@ def submit():
 
 	return render_template('submit.html')
 
+@app.route('/success')
+def success():
+
+	return render_template('success.html')
+
 @app.route('/new', methods=['POST'])
 def new():
 
