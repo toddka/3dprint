@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="well bs-component">
-              <form class="form-horizontal" action="/new" method="post">
+              <form class="form-horizontal" enctype="multipart/form-data" action="/new" method="post">
                 <fieldset>
                   <legend>Specify your request here</legend>
                   <div class="form-group">
@@ -39,7 +39,7 @@
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
-                      <input type="text" class="form-control" name="inputEmail" placeholder="Email" required="true">
+                      <input type="email" class="form-control" name="inputEmail" placeholder="Email" required="true">
                     </div>
                   </div>
                   <div class="form-group">
@@ -58,6 +58,13 @@
                     <div class="col-lg-10">
                       <textarea class="form-control" rows="3" name="inputAdditional"></textarea>
                       <span class="help-block">Add any additional information or specifications here.</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputFile"  name="inputFile" type="text" class="col-lg-2 control-label">File</label>
+                    <div class="col-lg-10">
+                      <input type="file"  name="file" class="file form-control" placeholder="File" required="true">
+                      <span class="help-block">The model must be a ".stl" file! We do not accept other formats for printing.</span>
                     </div>
                   </div>
                   <div class="form-group">
