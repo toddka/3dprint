@@ -1,0 +1,23 @@
+<html>
+{% include "navbar.html" %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+      <div class="container">
+            <div class="col-md-6 col-md-offset-3 centerfy">
+                <div class="">
+                    <img  src="static/img/made.png" class="img-responsive text-center" />
+                </div>
+            </div>
+        </div>
+      </div>
+      <h1 class="text-center"> Welcome to our 3D Printing Queue!</h1>
+      <p class="text-center"> Select from the options below to either check the status of your print or make a request.</p>
+      <div class='wrapper text-center'>
+      <div class="btn-group centered" style="padding: 10px">
+        <a href="/view" class="btn btn-primary btn-md">View the Queue</a>
+        <a href="/submit" class="btn btn-primary btn-md">Submit a Request</a>
+      </div>
+    </div>
+
+</html>

@@ -1,0 +1,17 @@
+.main-header {
+    text-align: center;
+    padding-top: 100px;
+    background: url(static/img/made.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 775px;
+}
+
+
+.home-h1 {
+    color: #fff;
+    font-size: 72px;
+    text-shadow: 0 0 5px #222
+}

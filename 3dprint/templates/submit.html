@@ -1,0 +1,72 @@
+<html>
+
+
+{% include "navbar.html" %}
+
+<div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h1 id="forms">Submit your print request!</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <form class="form-horizontal" action="/new" method="post">
+                <fieldset>
+                  <legend>Specify your request here</legend>
+                  <div class="form-group">
+                    <label for="inputName" class="col-lg-2 control-label">Name</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="inputName" placeholder="Name" required="true">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputCompany" class="col-lg-2 control-label">Company</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="inputCompany" placeholder="Company" required="true">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputTitle" class="col-lg-2 control-label">Job Title</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="inputTitle" placeholder="Job Title" required="true">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="inputEmail" placeholder="Email" required="true">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="select" class="col-lg-2 control-label">Choose Printer</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" name="select">
+                        <option>Formlabs</option>
+                        <option>NV</option>
+                        <option>uPrint</option>
+                        <option>Autodesk</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="textArea" class="col-lg-2 control-label">Additional Specifications</label>
+                    <div class="col-lg-10">
+                      <textarea class="form-control" rows="3" name="inputAdditional"></textarea>
+                      <span class="help-block">Add any additional information or specifications here.</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+</html>
