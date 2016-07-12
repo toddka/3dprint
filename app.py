@@ -1,5 +1,7 @@
 import os
+import smtplib
 from flask import Flask, redirect, url_for, request, render_template, make_response
+from flask_mail import Mail, Message
 from pymongo import MongoClient
 import gridfs
 from bson.objectid import ObjectId
@@ -9,7 +11,9 @@ from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = set(['.stlt', '.rar', '.mp3'])
 
 app = Flask(__name__)
-app.debug = True
+app.config.update(
+	DEBUG=True
+	)
 
 
 connection = MongoClient('ds025583.mlab.com', 25583)
@@ -65,7 +69,6 @@ def new():
 	    b = fs.put(f, filename=request.form['inputCompany'] + "_" + secure_filename(f.filename))
 # 		f.save('files/' + request.form['inputCompany'] + "_" + secure_filename(f.filename))
 
-
 	item = {
 		'name': request.form['inputName'],
 		'company': request.form['inputCompany'],
@@ -77,6 +80,20 @@ def new():
 	}
 
 	db.printdb.insert_one(item)
+
+	to = 'tashley@masschallenge.org'
+	gmail_user = 'tashley@masschallenge.org'
+	gmail_pwd = 'Lozlttp1!!'
+	smtpserver = smtplib.SMTP("smtp.gmail.com",587)
+	smtpserver.ehlo()
+	smtpserver.starttls()
+	smtpserver.ehlo
+	smtpserver.login(gmail_user, gmail_pwd)
+	header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:MADE@: A new print job has been added to the queue. \n'
+	msg = header + request.form['inputCompany'] + ' has created a new print job titled ' + request.form['inputTitle'] +' for the '+ request.form['select'] + ' printer.'
+	smtpserver.sendmail(gmail_user, to, msg)
+	smtpserver.close()
+	print "done"
 
 	return redirect(url_for('view'))
 
@@ -96,16 +113,14 @@ def get_file(_id=None):
     return render_template('download.html', names=fs.list())
 
 @app.route('/delete-file/<_id>')
-def delete_file(_id=None):
+def delete_file(_id=None, methods=['GET']):
 
     if _id is not None:
     	print _id
         fs.delete(ObjectId(_id))
         job = db.printdb.delete_one({'_id': ObjectId(_id)})
 
-    return render_template('admin.html')
-
-
+    return redirect(url_for('admin'))
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', debug=True)
