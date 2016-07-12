@@ -9,12 +9,17 @@ ALLOWED_EXTENSIONS = set(['.stlt', '.rar', '.mp3'])
 app = Flask(__name__)
 app.debug = True
 
-client = MongoClient('mongodb://localhost:27017/')
+
+connection = MongoClient('ds025583.mlab.com', 25583)
+db = connection['printdb']
+db.authenticate('admin', 'Impact!Now')
+
+# client = MongoClient('mongodb://localhost:27017/')
 # client = MongoClient(
 # 	os.environ['DB_PORT_27017_TCP_ADDR'], 
 # 	27017)
 
-db = client.printdb
+# db = client.printdb
 
 def allowed_file(filename):
     return '.' in filename and \
