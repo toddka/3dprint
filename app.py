@@ -1,6 +1,8 @@
 import os
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, make_response
 from pymongo import MongoClient
+import gridfs
+from bson.objectid import ObjectId
 from werkzeug.utils import secure_filename
 
 
@@ -13,11 +15,8 @@ app.debug = True
 connection = MongoClient('ds025583.mlab.com', 25583)
 db = connection['printdb']
 db.authenticate('admin', 'Impact!Now')
+fs = gridfs.GridFS(db)
 
-# client = MongoClient('mongodb://localhost:27017/')
-# client = MongoClient(
-# 	os.environ['DB_PORT_27017_TCP_ADDR'], 
-# 	27017)
 
 # db = client.printdb
 
@@ -43,6 +42,14 @@ def submit():
 
 	return render_template('submit.html')
 
+@app.route('/admin')
+def admin():
+
+	_items = db.printdb.find()
+	items = [item for item in _items]
+
+	return render_template('admin.html', items=items)
+
 @app.route('/success')
 def success():
 
@@ -55,7 +62,9 @@ def new():
 	print f.filename
 	# if f and allowed_file(f.filename):
 	if f:
-		f.save('files/' + request.form['inputCompany'] + "_" + secure_filename(f.filename))
+	    b = fs.put(f, filename=request.form['inputCompany'] + "_" + secure_filename(f.filename))
+# 		f.save('files/' + request.form['inputCompany'] + "_" + secure_filename(f.filename))
+
 
 	item = {
 		'name': request.form['inputName'],
@@ -64,11 +73,38 @@ def new():
 		'email': request.form['inputEmail'],
 		'printer': request.form['select'],
 		'additional': request.form['inputAdditional'],
+		'_id': b #storing file's id to retrieve from gridFS later
 	}
 
 	db.printdb.insert_one(item)
 
 	return redirect(url_for('view'))
+
+@app.route('/get-file/<_id>')
+def get_file(_id=None):
+
+    if _id is not None:
+        f = fs.find_one({'_id': ObjectId(_id)})
+        job = db.printdb.find_one({'_id': ObjectId(_id)})
+        name = job['company'] + "_" + job['title'] 
+
+        response = make_response(f.read())
+    	response.headers['Content-Type'] = 'application/octet-stream'
+    	response.headers["Content-Disposition"] = "attachment; filename={}".format(name)
+    	return response
+
+    return render_template('download.html', names=fs.list())
+
+@app.route('/delete-file/<_id>')
+def delete_file(_id=None):
+
+    if _id is not None:
+    	print _id
+        fs.delete(ObjectId(_id))
+        job = db.printdb.delete_one({'_id': ObjectId(_id)})
+
+    return render_template('admin.html')
+
 
 
 if __name__ == "__main__":
