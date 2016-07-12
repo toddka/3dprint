@@ -25,12 +25,22 @@
                 {% set number = 1 %}
                 {% for item in items %}
                   <tr class="active">
-                    <td>{{ number }}</td>
-                    <td>{{ item.company }} </td>
-                    <td>{{ item.title }} </td>
-                    <td>{{ item.printer }} </td>
+                    <td><b>{{ number }}</b></td>
+                    <td><b>{{ item.company }} </b> </td>
+                    <td><b>{{ item.title }} </b></td>
+                    <td><b>{{ item.printer }} </b></td>
                     <td><a href="{{ url_for('get_file', _id=item._id) }}">Download File</a></td>
                     <td><a href="{{ url_for('delete_file', _id=item._id) }}" class="btn btn-danger btn-sm">Delete</a></td>
+                  </tr>
+                  <tr class="active">
+                    <td></td>
+                    <td>Brief Description:</td>
+                    <td>{{ item.brief }} </td>
+                  </tr>
+                  <tr class="active">
+                    <td></td>
+                    <td>Additional Information:</td>
+                    <td>{{ item.additional }} </td>
                   </tr>
                 {% set number = number + 1 %}
                 {% endfor %}

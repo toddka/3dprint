@@ -75,22 +75,23 @@ def new():
 		'title': request.form['inputTitle'],
 		'email': request.form['inputEmail'],
 		'printer': request.form['select'],
+		'brief': request.form['inputBrief'],
 		'additional': request.form['inputAdditional'],
 		'_id': b #storing file's id to retrieve from gridFS later
 	}
 
 	db.printdb.insert_one(item)
 
-	to = 'tashley@masschallenge.org'
-	gmail_user = 'tashley@masschallenge.org'
-	gmail_pwd = 'Lozlttp1!!'
+	to = 'made@masschallenge.org'
+	gmail_user = 'eric@masschallenge.org'
+	gmail_pwd = 'omitted'
 	smtpserver = smtplib.SMTP("smtp.gmail.com",587)
 	smtpserver.ehlo()
 	smtpserver.starttls()
 	smtpserver.ehlo
 	smtpserver.login(gmail_user, gmail_pwd)
-	header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:MADE@: A new print job has been added to the queue. \n'
-	msg = header + request.form['inputCompany'] + ' has created a new print job titled ' + request.form['inputTitle'] +' for the '+ request.form['select'] + ' printer.'
+	header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:[MADE@Print: A new print job has been added to the queue. \n'
+	msg = header + request.form['inputCompany'] + ' has created a new print job titled ' + request.form['inputTitle'] +' for the '+ request.form['select'] + ' printer. \n \n http://made3d.pythonanywhere.com/admin'
 	smtpserver.sendmail(gmail_user, to, msg)
 	smtpserver.close()
 	print "done"

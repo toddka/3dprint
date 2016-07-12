@@ -66,27 +66,37 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="select" class="col-lg-2 control-label">Choose Printer</label>
+                    <label for="select" class="col-lg-2 control-label">Preferred Printer</label>
                     <div class="col-lg-10">
                       <select class="form-control" name="select">
                         <option>Formlabs</option>
                         <option>NV</option>
                         <option>uPrint</option>
                         <option>Autodesk</option>
+                        <option>Unsure</option>
                       </select>
+
+                    <span class="help-block">It's okay if you're not sure which one is best for your print.</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="textArea" class="col-lg-2 control-label">Brief Description</label>
+                    <div class="col-lg-10">
+                      <textarea class="form-control" rows="3" name="inputBrief"></textarea>
+                      <span class="help-block">Please include a brief description of what you are printing and what it will be used for (display, mechanical part, etc.). </span>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="textArea" class="col-lg-2 control-label">Additional Specifications</label>
                     <div class="col-lg-10">
                       <textarea class="form-control" rows="3" name="inputAdditional"></textarea>
-                      <span class="help-block">Add any additional information or specifications here. Please specify what your print will be used for (display, mechanical part, etc.) and if there are any specifications you need (material, preferred tolerance, or other advanced options)</span>
+                      <span class="help-block">Add any additional information or specifications here (orientation, density, scale or other advanced options).</span>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputFile"  name="inputFile" type="text" class="col-lg-2 control-label">File</label>
                     <div class="col-lg-10">
-                      <input type="file"  name="file" class="file form-control" placeholder="File" required="true">
+                      <input type="file"  name="file" class="file form-control" placeholder="File" required="true" accept=".stl">
                       <span class="help-block">The model must be a ".stl" file! We do not accept other formats for printing.</span>
                     </div>
                   </div>
