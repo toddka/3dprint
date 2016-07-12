@@ -83,7 +83,7 @@ def new():
 
 	to = 'tashley@masschallenge.org'
 	gmail_user = 'tashley@masschallenge.org'
-	gmail_pwd = 'Lozlttp1!!'
+	gmail_pwd = OMMITTED
 	smtpserver = smtplib.SMTP("smtp.gmail.com",587)
 	smtpserver.ehlo()
 	smtpserver.starttls()
