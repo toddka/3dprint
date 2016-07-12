@@ -90,7 +90,7 @@ def new():
 	smtpserver.starttls()
 	smtpserver.ehlo
 	smtpserver.login(gmail_user, gmail_pwd)
-	header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:[MADE]@Print: A new print job has been added to the queue. \n'
+	header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:[MADE@Print]: A new print job has been added to the queue. \n'
 	msg = header + request.form['inputCompany'] + ' has created a new print job titled ' + request.form['inputTitle'] +' for the '+ request.form['select'] + ' printer. \n \n http://made3d.pythonanywhere.com/admin'
 	smtpserver.sendmail(gmail_user, to, msg)
 	smtpserver.close()
